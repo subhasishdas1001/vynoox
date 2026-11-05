@@ -1,0 +1,270 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "A luxury apparel product in the VYNOOX catalog.",
+      "type": "object",
+      "properties": {
+        "storeId": { "type": "string", "maxLength": 64, "pattern": "^vynoox$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "slug": { "type": "string", "minLength": 1, "maxLength": 160, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "description": { "type": "string", "maxLength": 5000 },
+        "regularPrice": { "type": "number" },
+        "salePrice": { "type": "number" },
+        "compareAtPrice": { "type": "number" },
+        "sku": { "type": "string", "maxLength": 80 },
+        "barcode": { "type": "string", "maxLength": 80 },
+        "category": { "type": "string", "maxLength": 100 },
+        "collection": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "enum": ["published", "draft", "archived"] },
+        "stockQuantity": { "type": "number" },
+        "lowStockThreshold": { "type": "number" },
+        "trackInventory": { "type": "boolean" },
+        "allowBackorder": { "type": "boolean" },
+        "featured": { "type": "boolean" },
+        "newArrival": { "type": "boolean" },
+        "bestSeller": { "type": "boolean" },
+        "primaryImage": { "type": "string", "maxLength": 150000 },
+        "secondaryImage": { "type": "string", "maxLength": 150000 },
+        "videoUrl": { "type": "string", "maxLength": 500 },
+        "sizesCsv": { "type": "string", "maxLength": 200 },
+        "colorsCsv": { "type": "string", "maxLength": 300 },
+        "materialsCsv": { "type": "string", "maxLength": 300 },
+        "stylesCsv": { "type": "string", "maxLength": 300 },
+        "tagsCsv": { "type": "string", "maxLength": 500 },
+        "variantInventoryJson": { "type": "string", "maxLength": 5000 },
+        "seoTitle": { "type": "string", "maxLength": 160 },
+        "seoDescription": { "type": "string", "maxLength": 400 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["storeId", "name", "slug", "description", "regularPrice", "salePrice", "compareAtPrice", "sku", "category", "collection", "status", "stockQuantity", "primaryImage", "sizesCsv", "colorsCsv", "updatedAt"]
+    },
+    "Collection": {
+      "title": "Collection",
+      "description": "Curated fashion collection in the VYNOOX storefront.",
+      "type": "object",
+      "properties": {
+        "storeId": { "type": "string", "maxLength": 64, "pattern": "^vynoox$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "slug": { "type": "string", "minLength": 1, "maxLength": 120, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "description": { "type": "string", "maxLength": 1500 },
+        "image": { "type": "string", "maxLength": 150000 },
+        "featured": { "type": "boolean" },
+        "sortOrder": { "type": "number" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["storeId", "name", "slug", "description", "image", "featured", "sortOrder", "updatedAt"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product category for catalog organization.",
+      "type": "object",
+      "properties": {
+        "storeId": { "type": "string", "maxLength": 64, "pattern": "^vynoox$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "slug": { "type": "string", "minLength": 1, "maxLength": 120, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "description": { "type": "string", "maxLength": 1000 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["storeId", "name", "slug", "description", "updatedAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order with line items summary, shipping, and verified payment status.",
+      "type": "object",
+      "properties": {
+        "storeId": { "type": "string", "maxLength": 64, "pattern": "^vynoox$" },
+        "orderNumber": { "type": "string", "maxLength": 64 },
+        "customerId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "customerName": { "type": "string", "maxLength": 160 },
+        "customerEmail": { "type": "string", "maxLength": 160 },
+        "customerPhone": { "type": "string", "maxLength": 40 },
+        "shippingAddress": { "type": "string", "maxLength": 1000 },
+        "city": { "type": "string", "maxLength": 100 },
+        "state": { "type": "string", "maxLength": 100 },
+        "pinCode": { "type": "string", "maxLength": 30 },
+        "country": { "type": "string", "maxLength": 100 },
+        "itemsSummary": { "type": "string", "maxLength": 10000 },
+        "subtotal": { "type": "number" },
+        "discountAmount": { "type": "number" },
+        "shippingAmount": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "couponCode": { "type": "string", "maxLength": 64 },
+        "paymentMethod": { "type": "string", "enum": ["razorpay", "cod", "stripe"] },
+        "paymentStatus": { "type": "string", "enum": ["pending", "paid", "failed", "refunded"] },
+        "paymentReference": { "type": "string", "maxLength": 200 },
+        "status": { "type": "string", "enum": ["Pending", "Confirmed", "Processing", "Packed", "Shipped", "Delivered", "Cancelled", "Refunded"] },
+        "trackingNumber": { "type": "string", "maxLength": 120 },
+        "carrier": { "type": "string", "maxLength": 120 },
+        "internalNotes": { "type": "string", "maxLength": 2000 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["storeId", "orderNumber", "customerId", "customerName", "customerEmail", "customerPhone", "shippingAddress", "city", "state", "pinCode", "country", "itemsSummary", "subtotal", "discountAmount", "shippingAmount", "totalAmount", "paymentMethod", "paymentStatus", "status", "trackingNumber", "internalNotes", "createdAt", "updatedAt"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "Customer profile and saved preferences.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "fullName": { "type": "string", "maxLength": 160 },
+        "email": { "type": "string", "maxLength": 160 },
+        "phone": { "type": "string", "maxLength": 40 },
+        "defaultAddress": { "type": "string", "maxLength": 1000 },
+        "city": { "type": "string", "maxLength": 100 },
+        "state": { "type": "string", "maxLength": 100 },
+        "pinCode": { "type": "string", "maxLength": 30 },
+        "country": { "type": "string", "maxLength": 100 },
+        "wishlistIdsCsv": { "type": "string", "maxLength": 2000 },
+        "internalNotes": { "type": "string", "maxLength": 2000 },
+        "totalSpent": { "type": "number" },
+        "ordersCount": { "type": "number" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "fullName", "email", "phone", "defaultAddress", "city", "state", "pinCode", "country", "wishlistIdsCsv", "internalNotes", "totalSpent", "ordersCount", "updatedAt"]
+    },
+    "Coupon": {
+      "title": "Coupon",
+      "description": "Promotional discount or coupon code.",
+      "type": "object",
+      "properties": {
+        "storeId": { "type": "string", "maxLength": 64, "pattern": "^vynoox$" },
+        "code": { "type": "string", "minLength": 2, "maxLength": 40 },
+        "type": { "type": "string", "enum": ["percentage", "fixed", "free_shipping"] },
+        "value": { "type": "number" },
+        "minPurchase": { "type": "number" },
+        "expiryDate": { "type": "string", "maxLength": 64 },
+        "usageLimit": { "type": "number" },
+        "usedCount": { "type": "number" },
+        "appliesTo": { "type": "string", "maxLength": 200 },
+        "active": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["storeId", "code", "type", "value", "minPurchase", "expiryDate", "usageLimit", "usedCount", "appliesTo", "active", "updatedAt"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Customer product rating and moderated review.",
+      "type": "object",
+      "properties": {
+        "storeId": { "type": "string", "maxLength": 64, "pattern": "^vynoox$" },
+        "productId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "productName": { "type": "string", "maxLength": 160 },
+        "authorUid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "authorName": { "type": "string", "maxLength": 120 },
+        "rating": { "type": "number" },
+        "title": { "type": "string", "maxLength": 160 },
+        "comment": { "type": "string", "maxLength": 2000 },
+        "reviewImage": { "type": "string", "maxLength": 150000 },
+        "verifiedPurchase": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["approved", "pending", "rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["storeId", "productId", "productName", "authorUid", "authorName", "rating", "title", "comment", "verifiedPurchase", "status", "createdAt"]
+    },
+    "Page": {
+      "title": "Page",
+      "description": "Editable CMS page for storefront policies and brand content.",
+      "type": "object",
+      "properties": {
+        "storeId": { "type": "string", "maxLength": 64, "pattern": "^vynoox$" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "slug": { "type": "string", "minLength": 1, "maxLength": 120, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "subtitle": { "type": "string", "maxLength": 300 },
+        "content": { "type": "string", "maxLength": 25000 },
+        "seoTitle": { "type": "string", "maxLength": 160 },
+        "seoDescription": { "type": "string", "maxLength": 400 },
+        "published": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["storeId", "title", "slug", "subtitle", "content", "seoTitle", "seoDescription", "published", "updatedAt"]
+    },
+    "StoreConfig": {
+      "title": "StoreConfig",
+      "description": "Global storefront settings, theme customizer, homepage sections, shipping, and payment settings.",
+      "type": "object",
+      "properties": {
+        "storeId": { "type": "string", "maxLength": 64, "pattern": "^vynoox$" },
+        "configKey": { "type": "string", "maxLength": 80 },
+        "payload": { "type": "string", "maxLength": 150000 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["storeId", "configKey", "payload", "updatedAt"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized staff member with role-based access control.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "email": { "type": "string", "maxLength": 160 },
+        "name": { "type": "string", "maxLength": 120 },
+        "role": { "type": "string", "enum": ["Super Admin", "Admin", "Product Manager", "Order Manager", "Content Manager"] },
+        "active": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "name", "role", "active", "updatedAt"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "Audit log entry for admin actions.",
+      "type": "object",
+      "properties": {
+        "storeId": { "type": "string", "maxLength": 64, "pattern": "^vynoox$" },
+        "actorUid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "actorEmail": { "type": "string", "maxLength": 160 },
+        "action": { "type": "string", "maxLength": 160 },
+        "details": { "type": "string", "maxLength": 1000 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["storeId", "actorUid", "actorEmail", "action", "details", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Storefront products catalog"
+    },
+    "/collections/{collectionId}": {
+      "schema": { "$ref": "#/entities/Collection" },
+      "description": "Curated product collections"
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Product categories"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Customer orders"
+    },
+    "/customers/{customerId}": {
+      "schema": { "$ref": "#/entities/Customer" },
+      "description": "Customer profiles and addresses"
+    },
+    "/coupons/{couponId}": {
+      "schema": { "$ref": "#/entities/Coupon" },
+      "description": "Promotional discount codes"
+    },
+    "/reviews/{reviewId}": {
+      "schema": { "$ref": "#/entities/Review" },
+      "description": "Customer product reviews"
+    },
+    "/pages/{pageId}": {
+      "schema": { "$ref": "#/entities/Page" },
+      "description": "CMS pages and policies"
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/StoreConfig" },
+      "description": "Store settings, theme customizer, and homepage builder configuration"
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "RBAC admin users"
+    },
+    "/logs/{logId}": {
+      "schema": { "$ref": "#/entities/ActivityLog" },
+      "description": "Admin security and activity audit logs"
+    }
+  }
+}

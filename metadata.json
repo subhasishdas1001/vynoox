@@ -1,0 +1,6 @@
+{
+  "name": "VYNOOX — Architectural Luxury Streetwear & E-Commerce Platform",
+  "description": "Discover VYNOOX international luxury streetwear, heavyweight acid-washed essentials, and bespoke storefront management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
